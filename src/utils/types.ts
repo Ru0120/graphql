@@ -1,7 +1,5 @@
 export interface User {
-  email: string;
-  password: string;
-  userName: string;
+  userId: string;
 }
 
 export interface Context {

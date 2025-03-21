@@ -1,10 +1,11 @@
 export const authSchemaTypes = `
-type User{
-username:String
-password:String
-}
+    type User{
+        username:String
+        password:String
+    }
 `;
+
 export const authSchemaMutations = `
-login(username:String!,password:String!):String
-register(username:String!,password:String!,email:String):String
+    register(userName:String!,password:String!,email:String):Boolean
+    login(email: String, password: String):String
 `;

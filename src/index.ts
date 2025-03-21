@@ -10,6 +10,10 @@ import {
   userSchemaQueries,
   userSchemaMutations,
 } from "./modules/user/graphql/schema/userSchema";
+import { authSchemaMutations } from "./modules/auth/graphql/schema/authSchema";
+import { authMutations } from "./modules/auth/graphql/mutations/authMutations";
+import { userQueries } from "./modules/user/graphql/queries/userQueries";
+import { userMutations } from "./modules/user/graphql/mutations/userMutations";
 
 dotenv.config();
 
@@ -22,30 +26,34 @@ mongoose
 
 const app = express();
 
-interface User {
-  email: string;
-  password: string;
-  userName: string;
-}
 const typeDefs = `
-${userSchemaTypes}
+  ${userSchemaTypes}
 
-type Query{
-${userSchemaQueries}
-}
+  type Query{
+    ${userSchemaQueries}
+  }
 
-type Mutation{
-${userSchemaMutations}
-}
+  type Mutation{
+    ${userSchemaMutations}
+    ${authSchemaMutations}
+  }
 `;
+
 const resolvers = {
-  Query: {},
-  Mutation: {},
+  Query: {
+    ...userQueries,
+  },
+  Mutation: {
+    ...authMutations,
+    ...userMutations,
+  },
 };
+
 const server = new ApolloServer<Context>({
   typeDefs,
   resolvers,
 });
+
 const startServer = async () => {
   await server.start();
 
@@ -57,9 +65,9 @@ const startServer = async () => {
         const token = req.headers.authorization;
         if (token) {
           try {
-            const tokendata = jwt.verify(token, "secret") as any;
+            const tokendata = jwt.verify(token, "token") as any;
 
-            return { user: tokendata?.user };
+            return { user: tokendata };
           } catch {
             return { user: null };
           }

@@ -1,10 +1,25 @@
-import jwt from "jsonwebtoken";
+import { Users } from "../../../user/model/userModel";
+
 export const authMutations = {
-  login: (
-    _parent: undefined,
-    { username, password }: { username: string; password: string }
+  register: async (
+    parent: undefined,
+    args: {
+      email: string;
+      password: string;
+      userName: string;
+    }
   ) => {
-    const token = jwt.sign({ user: { firstname: "1" } }, "secret");
-    return token;
+    console.log(args);
+
+    return await Users.register(args);
+  },
+  login: async (
+    parent: undefined,
+    args: {
+      email: string;
+      password: string;
+    }
+  ) => {
+    return await Users.login(args);
   },
 };

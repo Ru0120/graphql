@@ -1,18 +1,17 @@
 export const userSchemaTypes = `
-type User{
-id:ID!
-email:String
-password:String
-username:String
-createdAt:String
-updatedAt:String
-}
+    type User{
+        id:ID!
+        email:String
+        userName:String
+        createdAt:String
+        updatedAt:String
+    }
 `;
+
 export const userSchemaQueries = `
-user:User
+    getProfile: User
 `;
+
 export const userSchemaMutations = `
-userUpdate(
-userName:String!
-email:String!):String
+    updateProfile(userName: String, email:String): User
 `;
