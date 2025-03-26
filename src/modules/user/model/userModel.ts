@@ -1,4 +1,4 @@
-import mongoose, { Model, Document } from "mongoose";
+import mongoose, { Model } from "mongoose";
 import { userSchame } from "./schema/userSchema";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -12,17 +12,18 @@ interface UserModel extends Model<IUser> {
   }: {
     userName: string;
     email: string;
-    password: string;
-  }): Promise<Boolean>;
-  login({
+    password: string;}): Promise<Boolean>;
+  
+    login({
     password,
     email,
   }: {
     password: string;
-    email: string;
-  }): Promise<String>;
-  getProfile(_id: string): Promise<IUser>;
-  profileUpdate(_id: string, userName: string, email: string): Promise<IUser>;
+    email: string;}): Promise<String>;
+  
+    getProfile(_id: string): Promise<IUser>;
+  
+    profileUpdate(_id: string, userName: string, email: string): Promise<IUser>;
 }
 
 class User {

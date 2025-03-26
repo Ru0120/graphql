@@ -13,7 +13,7 @@ import {
 import { authSchemaMutations } from "./modules/auth/graphql/schema/authSchema";
 import { authMutations } from "./modules/auth/graphql/mutations/authMutations";
 import { userQueries } from "./modules/user/graphql/queries/userQueries";
-import { userMutations } from "./modules/user/graphql/mutations/userMutations";
+import { userMutations } from "./modules/user/graphql/mutations/userMutations"
 
 dotenv.config();
 
