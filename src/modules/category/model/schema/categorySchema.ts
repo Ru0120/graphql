@@ -6,6 +6,7 @@ export const categorySchema= new schema(
         _id:{
             type:String,
             default:nanoid(),
+            unique: true
         },
         name:{
             type:String,
@@ -15,13 +16,14 @@ export const categorySchema= new schema(
         },
         status:{
             type:String,
-            required:true
+            required:true,
+            enum:["active","inactive"]
         },
         descriptoin:{
             type:String,
-            required:String!
+            
         },
 
     },
-    {collection:"categories",timestamps:true}
+    {timestamps:true}
 );

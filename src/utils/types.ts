@@ -5,3 +5,4 @@ export interface User {
 export interface Context {
   user: User;
 }
+

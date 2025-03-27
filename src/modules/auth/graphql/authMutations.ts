@@ -1,4 +1,4 @@
-import { Users } from "../../../user/model/userModel";
+import { Users } from "../../user/model/userModel";
 
 export const authMutations = {
   register: async (

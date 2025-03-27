@@ -4,15 +4,27 @@ import { ICategory } from "../types";
 
 interface categoryModel extends Model<ICategory>{
 
-     getCategories:Promise<ICategory>;
+     getCategories():Promise<ICategory>;
      getCategory:Promise<ICategory>;
 
-     createCategory(name:string):Promise<ICategory>;
-     updateCategory(_id:string,name:string,description:string):Promise<ICategory>;
-     delete(_id:string):Promise<String>
+     createCategory(
+        name:string,
+        status:string,
+        decsription:string
+    ):Promise<ICategory>;
+     
+     updateCategory(
+        _id:string,
+        name:string,
+        description:string
+    ):Promise<ICategory>;
+     
+     delete(
+        _id:string
+    ):Promise<String>
 }
 
-class Category{
+export class Category{
     static async getCategory(this:categoryModel,_id:string){
         const category = await this.findOne({_id});
 
@@ -22,8 +34,8 @@ class Category{
         return category;
     }
 
-    static async getCategories(this:categoryModel,_id:string){
-        const categories = await this.find({_id});
+    static async getCategories(this:categoryModel){
+        const categories = await this.find({});
 
         if (!categories){
             throw new Error("categories not found")
@@ -31,18 +43,34 @@ class Category{
         return categories;
     }
 
-    static async createCat(this:categoryModel,name:string){
-        const createCategory= await this.create({
-            name
-        })
-        return createCategory;
+    static async createCategory(
+        this: categoryModel,
+        name: string, status: string, description: string
+      ): Promise<ICategory> {
+   
+
+       
+    
+        const category = await this.create({
+            name,
+            status,
+            description,
+          });
+
+        console.log(3, category)
+
+        return category;
+      }
     }
 
 
-}
+
 categorySchema.loadClass(Category);
 
-export const Categories:categoryModel=mongoose.model<ICategory, categoryModel>(
+export const Categories:categoryModel=mongoose.model
+<ICategory, 
+categoryModel>
+(
     "Category",
     categorySchema
 );
