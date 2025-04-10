@@ -7,6 +7,7 @@ export const userSchame = new schema(
     _id: {
       type: String,
       default: nanoid(),
+       
     },
     email: {
       type: String,

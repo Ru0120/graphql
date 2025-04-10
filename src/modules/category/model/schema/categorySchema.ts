@@ -6,7 +6,7 @@ export const categorySchema= new schema(
         _id:{
             type:String,
             default:nanoid(),
-            unique: true
+            
         },
         name:{
             type:String,

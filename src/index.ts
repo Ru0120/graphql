@@ -28,16 +28,19 @@ import{catagoriesQueries, categoryResolver}from "./modules/category/graphql/quer
 import{ categoryMutations}from"./modules/category/graphql/mutations/categoryMutations"
 import { transactionQueries, } from "./modules/transaction/graphql/transQueries";
 import{transMutations}from "./modules/transaction/graphql/transMutations"
+
+
 dotenv.config();
 
-mongoose
-  .connect(process.env.MONGO_URL as string)
+mongoose.connect(process.env.MONGO_URL as string)
   .then(() => {
-    console.log("Mongo connected");
+    console.log("Connected to MongoDB successfully");
   })
   .catch((err) => console.error(err));
 
 const app = express();
+
+
 
 const typeDefs = `
   ${userSchemaTypes}
