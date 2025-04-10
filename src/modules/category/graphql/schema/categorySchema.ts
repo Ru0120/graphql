@@ -1,16 +1,27 @@
 export const categorySchemaTypes=`
-        type Category{
+
+type test {
+    income:Float
+    expense:Float
+}
+        
+type Category{
         id:ID
         name:String
         status:String
         description:String
         createdAt:String
         updatedAt:String
-        }
+        transactions: [Transaction]
+        transactionsTotalAmount:Float
+        transTotalExpenceAndIncome:test
+        transactionsCount:Float
+
+}
 `;
-export const categorySchmaQueries=`
+export const categorySchemaQueries=`
     getCategories:[Category]
-    getCategory(id:String):String
+    getCategory(id:ID!):Category
      `;
 export const categorySchemaMutations=`
     createCategory(name:String!,status:String!,description:String):Category

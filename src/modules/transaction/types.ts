@@ -1,4 +1,5 @@
-export interface ITsaction extends Document{
+import { Document } from "mongoose";
+export interface ITransaction extends Document{
     amount:number;
     categoryId:string;
     date:string;

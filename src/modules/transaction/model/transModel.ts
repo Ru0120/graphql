@@ -2,12 +2,12 @@ import mongoose, { Document, Model } from "mongoose";
 import { transSchema } from "./transSchema";
 
 export interface ITransaction extends Document {
-  amount: Number;
-  categoryId: String;
-  date: String;
-  description: String;
-  type: String;
-  userId: String;
+  amount: number;
+  categoryId: string;
+  date: string;
+  description: string;
+  type: string;
+  userId: string;
 }
 
 interface transactionModel extends Model<ITransaction> {

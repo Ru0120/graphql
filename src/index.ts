@@ -12,7 +12,7 @@ import {
 } from "./modules/user/graphql/schema/userSchema";
 import{
   categorySchemaTypes,
-  categorySchmaQueries,
+  categorySchemaQueries,
   categorySchemaMutations
 }from "./modules/category/graphql/schema/categorySchema"
 import{
@@ -22,11 +22,11 @@ import{
 }from "./modules/transaction/graphql/transSchema"
 import { authSchemaMutations } from "./modules/auth/graphql/authSchema";
 import { authMutations } from "./modules/auth/graphql/authMutations";
-import { userQueries } from "./modules/user/graphql/queries/userQueries";
+import { userQueries,userResolver } from "./modules/user/graphql/queries/userQueries";
 import { userMutations } from "./modules/user/graphql/mutations/userMutations"
-import{catagoriesQueries}from "./modules/category/graphql/queries/categoryQueries"
+import{catagoriesQueries, categoryResolver}from "./modules/category/graphql/queries/categoryQueries"
 import{ categoryMutations}from"./modules/category/graphql/mutations/categoryMutations"
-import { transQueries } from "./modules/transaction/graphql/transQueries";
+import { transactionQueries, } from "./modules/transaction/graphql/transQueries";
 import{transMutations}from "./modules/transaction/graphql/transMutations"
 dotenv.config();
 
@@ -43,10 +43,10 @@ const typeDefs = `
   ${userSchemaTypes}
   ${categorySchemaTypes}
   ${transSchemaTypes}
-
+  
   type Query{
     ${userSchemaQueries}
-    ${categorySchmaQueries}
+    ${categorySchemaQueries}
     ${transSchemaQueries}
   }
 
@@ -62,14 +62,24 @@ const resolvers = {
   Query: {
     ...userQueries,
     ...catagoriesQueries,
-    ...transQueries
+    ...transactionQueries
   },
   Mutation: {
     ...authMutations,
     ...userMutations,
     ...categoryMutations,
-    ...transMutations
+    ...transMutations,
+    
   },
+
+  Category: {
+    ...categoryResolver,
+    
+  },
+
+  User:{
+    ...userResolver
+  }
 };
 
 const server = new ApolloServer<Context>({
@@ -84,11 +94,11 @@ const startServer = async () => {
     "/graphql",
     express.json(),
     expressMiddleware(server, {
-      context: async ({ req, res }) => {
+     context: async ({ req, res }) => {
         const token = req.headers.authorization;
         if (token) {
           try {
-            const tokendata = jwt.verify(token, "token") as any;
+            const tokendata = jwt.verify(token,"token") as any;
 
             return { user: tokendata };
           } catch {

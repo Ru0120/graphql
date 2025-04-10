@@ -3,7 +3,7 @@ import { Transactions } from "../model/transModel";
 
 export const transMutations = {
   createTransaction: async (
-    _parent: null,
+    _parent: undefined,
     args: {
       amount: Number;
       categoryId: String;
@@ -47,7 +47,7 @@ export const transMutations = {
     return updatedTransaction;
   },
 
-  deleteTransaction: async (_parent: null, args: { id: string }) => {
+  deleteTransaction: async (_parent: undefined, args: { id: string }) => {
     const deletedTransaction = await Transactions.findByIdAndDelete({
       _id: args.id,
     });

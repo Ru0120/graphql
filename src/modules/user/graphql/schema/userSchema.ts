@@ -1,11 +1,21 @@
 export const userSchemaTypes = `
-    type User{
+
+type IncomeExpence{
+    income:Float
+    expense:Float
+}
+
+type User{
         id:ID!
         email:String
         userName:String
         createdAt:String
         updatedAt:String
-    }
+        transactions:[Transaction]
+        userTotalAmount:Float
+        userTotalExpenceIncome:IncomeExpence
+        userTransactionCount:Float
+}
 `;
 
 export const userSchemaQueries = `

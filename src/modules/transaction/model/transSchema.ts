@@ -18,7 +18,7 @@ export const transSchema = new schema(
       required: true,
     },
     date: {
-      type: String,
+      type: Date,
       required: true,
     },
     description: {
@@ -27,7 +27,7 @@ export const transSchema = new schema(
     type: {
       type: String,
       required: true,
-      enum: ["income", "expense"],
+      enum: ["expence", "income"],
     },
     userId: {
       type: String,

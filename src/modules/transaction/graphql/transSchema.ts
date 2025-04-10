@@ -1,21 +1,22 @@
 export const transSchemaTypes=`
 type Transaction{
-id:ID
-amount: Float,
-categoryId: String,
-date: String,
-description: String,
-type: String,
-userId: String,
+
+   id:ID
+   amount: Float,
+   categoryId: String,
+   date: String,
+   description: String,
+   type: String,
+   userId: String,
 }
 `;
 
 export const transSchemaQueries=`
-getTransactions:[Transaction]
+ 
+  getTransactions(categoryId: String, categoryIds: [String], limit: Int, page: Int, skip: Int, sortBy: String, sortOrder: Int, type: String, sortByDate: String, orderByDate: Int, 
+  minAmount: Int, maxAmount: Int): [Transaction],
 
-getTransaction(
-     id:String):String
-
+  getTransaction(id:ID!):Transaction
 `;
 export const transSchemaMutations=`
 createTransaction(

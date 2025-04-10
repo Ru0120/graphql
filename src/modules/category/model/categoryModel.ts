@@ -4,8 +4,8 @@ import { ICategory } from "../types";
 
 interface categoryModel extends Model<ICategory>{
 
-     getCategories():Promise<ICategory>;
-     getCategory:Promise<ICategory>;
+    //  getCategories():Promise<ICategory>;
+    //  getCategory():Promise<ICategory>;
 
      createCategory(
         name:string,
@@ -57,7 +57,7 @@ export class Category{
             description,
           });
 
-        console.log(3, category)
+      
 
         return category;
       }
